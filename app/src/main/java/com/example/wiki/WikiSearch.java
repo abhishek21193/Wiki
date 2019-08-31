@@ -87,21 +87,27 @@ public class WikiSearch extends Fragment {
         @Override
         public void onChanged(DataCallBack<WikiResponse> wikiResponseDataCallBack) {
             progressBar.setVisibility(View.INVISIBLE);
-            if (wikiResponseDataCallBack != null) {
-                if (wikiResponseDataCallBack.getStatus() == DataCallBack.SUCCESS) {
-                    if (wikiResponseDataCallBack.getData() != null && wikiResponseDataCallBack.getData().getQuery() != null) {
-                        queryList.clear();
-                        queryList.addAll(wikiResponseDataCallBack.getData().getQuery().getPages());
-                        Log.d(TAG, queryList.toString());
-                        wikiAdapter.notifyDataSetChanged();
+            if (Utility.isValidStr(mSearchQuery)) {
+                if (wikiResponseDataCallBack != null) {
+                    if (wikiResponseDataCallBack.getStatus() == DataCallBack.SUCCESS) {
+                        if (wikiResponseDataCallBack.getData() != null && wikiResponseDataCallBack.getData().getQuery() != null) {
+                            queryList.clear();
+                            queryList.addAll(wikiResponseDataCallBack.getData().getQuery().getPages());
+                            Log.d(TAG, queryList.toString());
+                            wikiAdapter.setQuery(mSearchQuery);
+                            wikiAdapter.notifyDataSetChanged();
+                        }
+
+                    } else {
+                        Toast.makeText(getContext(), wikiResponseDataCallBack.getError(), Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
-                    Toast.makeText(getContext(), wikiResponseDataCallBack.getError(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
                 }
-
             } else {
-                Toast.makeText(getContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                queryList.clear();
+                wikiAdapter.notifyDataSetChanged();
             }
 
         }
@@ -124,8 +130,8 @@ public class WikiSearch extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (Utility.isValidStr(newText)) {
-                    mSearchQuery = newText;
+                mSearchQuery = newText;
+                if (Utility.isValidStr(mSearchQuery)) {
                     mSearchHandler.removeCallbacks(mRunSearchSuggestions);
                     mStartTime = System.currentTimeMillis();
                     mSearchHandler.postDelayed(mRunSearchSuggestions, 500);

@@ -51,7 +51,7 @@ public class WikiRepo {
         }
 
         if (response.raw().networkResponse() != null) {
-            Log.e(TAG, "response came from server");
+            Log.d(TAG, "response came from server");
         }
     }
 

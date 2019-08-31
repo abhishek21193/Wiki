@@ -1,6 +1,10 @@
 package com.example.wiki;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +31,7 @@ public class WikiAdapter extends RecyclerView.Adapter<WikiAdapter.CustomViewHold
     private List<Page> queryList;
     private Context context;
     private ClickInterface mClickInterface;
+    private String mQuery;
 
     public WikiAdapter(Context context, List<Page> queryList, ClickInterface clickInterface) {
         this.context = context;
@@ -53,7 +58,8 @@ public class WikiAdapter extends RecyclerView.Adapter<WikiAdapter.CustomViewHold
         }
     }
 
-    @Override @NonNull
+    @Override
+    @NonNull
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View returnView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
 
@@ -64,9 +70,9 @@ public class WikiAdapter extends RecyclerView.Adapter<WikiAdapter.CustomViewHold
     public void onBindViewHolder(CustomViewHolder holder, int position) {
 
         final Page page = queryList.get(position);
-        holder.txtName.setText(page.getTitle());
+        String title = page.getTitle();
 
-        if(page.getTerms() != null && page.getTerms().getDescription().size() > 0) {
+        if (page.getTerms() != null && page.getTerms().getDescription().size() > 0) {
             holder.desc.setText(page.getTerms().getDescription().get(0));
             holder.desc.setVisibility(View.VISIBLE);
         } else {
@@ -83,7 +89,7 @@ public class WikiAdapter extends RecyclerView.Adapter<WikiAdapter.CustomViewHold
                     .error(R.drawable.ic_launcher_background)
                     .into(holder.imgImage);
         } else {
-            holder.imgImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_launcher_background));
+            holder.imgImage.setVisibility(View.GONE);
         }
 
         holder.itemContainer.setOnClickListener(new View.OnClickListener() {
@@ -93,10 +99,32 @@ public class WikiAdapter extends RecyclerView.Adapter<WikiAdapter.CustomViewHold
             }
         });
 
+        if (Utility.isValidStr(mQuery) && Utility.isValidStr(title)) {
+            int startIndex = title.toLowerCase().indexOf(mQuery.toLowerCase());
+            int endIndex = mQuery.length();
+            if(startIndex >=0 && endIndex < title.length()) {
+                holder.txtName.setText(setSpan(startIndex, endIndex, title));
+            } else {
+                holder.txtName.setText(title);
+            }
+        } else {
+            holder.txtName.setText(title);
+        }
     }
+
+    private SpannableString setSpan(int startIndex, int endIndex, String title) {
+        SpannableString spannableContent = new SpannableString(title);
+        spannableContent.setSpan(new StyleSpan(Typeface.BOLD), startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableContent;
+    }
+
 
     @Override
     public int getItemCount() {
         return queryList.size();
+    }
+
+    public void setQuery(String query) {
+        mQuery = query;
     }
 }
