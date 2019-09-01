@@ -19,7 +19,6 @@ public class WikiLauncher extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mFragmentManager = getSupportFragmentManager();
 
         switchFunctionality(SEARCH, null);
@@ -54,4 +53,16 @@ public class WikiLauncher extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+        int backStackEntryCount = mFragmentManager.getBackStackEntryCount();
+        if (backStackEntryCount == 1) {
+            finish();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 }
