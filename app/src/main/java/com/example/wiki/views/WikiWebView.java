@@ -1,4 +1,4 @@
-package com.example.wiki;
+package com.example.wiki.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.example.wiki.R;
+import com.example.wiki.Utility;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

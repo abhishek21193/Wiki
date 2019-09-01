@@ -1,6 +1,10 @@
-package com.example.wiki;
+package com.example.wiki.viewmodels;
 
 import android.content.Context;
+
+import com.example.wiki.network.DataCallBack;
+import com.example.wiki.repos.WikiRepo;
+import com.example.wiki.models.WikiResponse;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

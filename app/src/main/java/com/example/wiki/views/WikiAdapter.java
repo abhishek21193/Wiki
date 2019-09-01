@@ -1,4 +1,4 @@
-package com.example.wiki;
+package com.example.wiki.views;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -15,6 +15,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wiki.R;
+import com.example.wiki.Utility;
+import com.example.wiki.models.Page;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 

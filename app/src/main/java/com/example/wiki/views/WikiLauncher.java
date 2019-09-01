@@ -1,10 +1,12 @@
-package com.example.wiki;
+package com.example.wiki.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+
+import com.example.wiki.R;
 
 public class WikiLauncher extends AppCompatActivity {
 

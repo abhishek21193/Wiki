@@ -1,4 +1,4 @@
-package com.example.wiki;
+package com.example.wiki.views;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,6 +11,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import com.example.wiki.network.DataCallBack;
+import com.example.wiki.R;
+import com.example.wiki.Utility;
+import com.example.wiki.models.WikiResponse;
+import com.example.wiki.viewmodels.WikiSearchViewModel;
+import com.example.wiki.models.Page;
 
 import java.util.ArrayList;
 import java.util.List;

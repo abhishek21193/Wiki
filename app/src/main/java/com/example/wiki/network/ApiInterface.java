@@ -1,4 +1,7 @@
-package com.example.wiki;
+package com.example.wiki.network;
+
+import com.example.wiki.Constant;
+import com.example.wiki.models.WikiResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

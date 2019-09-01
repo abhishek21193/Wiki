@@ -1,7 +1,12 @@
-package com.example.wiki;
+package com.example.wiki.repos;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.example.wiki.models.WikiResponse;
+import com.example.wiki.network.ApiInterface;
+import com.example.wiki.network.DataCallBack;
+import com.example.wiki.network.RetroClient;
 
 import androidx.lifecycle.MutableLiveData;
 import retrofit2.Call;

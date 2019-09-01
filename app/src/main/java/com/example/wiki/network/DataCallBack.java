@@ -1,4 +1,4 @@
-package com.example.wiki;
+package com.example.wiki.network;
 
 public class DataCallBack<T> {
 

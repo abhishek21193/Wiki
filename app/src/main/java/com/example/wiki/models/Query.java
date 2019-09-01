@@ -1,4 +1,4 @@
-package com.example.wiki;
+package com.example.wiki.models;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

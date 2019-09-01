@@ -1,8 +1,10 @@
-package com.example.wiki;
+package com.example.wiki.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.Log;
+
+import com.example.wiki.Constant;
 
 import java.io.IOException;
 
